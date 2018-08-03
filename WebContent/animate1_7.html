@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<style>
+body {
+    font-family: arial, sans-serif;
+    background: #000;
+    color: #fff;
+    font-size: 14px;
+}
+
+#container {
+    width: 700px;
+    margin: 40px auto;
+    overflow: auto;
+    border: 1px solid #ccc;
+}
+
+header {
+    background: #333;
+    padding: 10px;
+    text-aligh: center;
+}
+
+#shouts {
+    height: 150px;
+    border: #333 1px solid;
+    margin: 30px;
+    padding: 15px;
+    overflow-y: scroll;
+}
+
+#shouts li {
+    list-style: none;
+    line-height: 1.7em;
+}
+
+footer {
+    padding: 10px;
+    background: #333;
+    text-align: center;
+}
+input#name,
+input#shout {
+    padding: 3px;
+    height: 15px;
+}
+input#name {
+    width: 130px;
+    margin-right: 20px;
+}
+input#shout {
+    width: 170px;
+    margin-right: 20px;
+}
+input#submit {
+    padding: 5px 10px;
+    border: 0;
+    background: #666;
+    color: #fff;
+    cursor: pointer;
+}
+</style>
+
+<script>
+$(document).ready( function() {
+    
+    // populate shouts
+    //$( "#shouts ul" ).load( "http://timivey.com/external/codepen/shoutbox/load_shouts.php" );
+    
+    // Put mouse focus on name
+    $('#name').focus();
+    
+	// submit handler
+	$('#submit').on('click', function(e) {
+       e.preventDefault();
+       var name = $('#name').val();
+       var shout = $('#shout').val();
+       var dataString = 'name=' + name + '&shout=' + shout;
+       
+       // validation
+       if ( name == '' || shout == '' ) {
+           alert('Please fill in your name and shout');
+       } else {
+           $.ajax({
+              type: 'post',
+               url: 'http://timivey.com/external/codepen/shoutbox/shoutbox.php',
+               data: dataString,
+               cache: false,
+               success: function(html) {
+                   console.log(html);
+                   $('#shouts ul').prepend(html);
+               }
+           });
+       }
+        
+        // erase shout message
+        $('#shout').val('').focus();
+       
+   });
+});
+</script>
+</head>
+<body>
+
+<div id="container">
+    <header>
+        <h1>JS Shoutbox</h1>
+        <p>Give me a shoutout!</p>
+    </header>
+    <div id="shouts">
+        <ul>
+            <li></li>
+        </ul>
+    </div>
+    <footer>
+        <form>
+            <label>Name: </label>
+            <input type="text" id="name">
+            <label>Shout text: </label>
+            <input type="text" id="shout">
+            <input type="submit" id="submit" value="shout!">
+        </form>
+    </footer>
+</div>
+
+
+
+
+</body>
+</html>

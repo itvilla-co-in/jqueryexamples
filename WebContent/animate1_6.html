@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<style>
+form {
+    
+    width: 400px;
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid grey;
+    line-height: 50px;
+}
+</style>
+
+<script>
+$(document).ready(function(){
+  
+	$('.confirm_appointment').submit(function(e) {
+	    
+	    e.preventDefault();
+	    
+	    // $(this).serialize(); will be the serialized form
+	    $(this).append($(this).serialize() + '<br />');
+	});
+	
+});
+</script>
+</head>
+<body>
+
+<form name='confirm_appointment' method='post' class='confirm_appointment'>
+    Name : <input type='text' name="hello" value='Your Name' /></br>
+    Email : <input type='text' name="hi" value='Your Email' /></br>
+    Comment : <input type='text' name="hi" value='Comment' /></br>
+    <input type='submit' class='update_appointment_button' value='submit' />
+</form>
+
+
+<div class="comment">
+
+</div>
+
+
+</body>
+</html>
