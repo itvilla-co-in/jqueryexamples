@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+<script>
+
+$(document).ready(function(){
+
+	$("button").click(function(){
+        $.getJSON("sample3.json", function(data){
+        	
+           $.each(data, function(i, user){
+   				console.log(user);
+   	
+   				var comment ='<div id="comment" class="row">' +
+                '<div id="id" class="col">' + 
+                user.id +
+                '</div>' +
+                '<div class="col">' + 
+                user.name +
+                '</div>' +
+                '<div class="col">' + 
+                user.body +
+                '</div>' +
+                '<div id="reply" class="col">' + 
+                'reply' +
+                '</div>' +
+                '</div> '
+                 //console.log(comment);
+                 $("#main").append(comment);
+                });
+
+           
+           /* $( "div.row" ).on( "click", "#id", function() {
+        	   console.log($( this ).text());
+        	 });*/
+           
+           var var1;
+           $( "div.row" ).one( "click", "#reply", function(event) {
+        	   //console.log($( this ).text());
+        	   var form1 = '<form id="target" action="#">' +
+        		    '<div class="form-group">' +
+        	      '<label for="email">Email:</label>' +
+        	      '<input type="email" class="form-control" id="email" placeholder="Enter email" name="email">' +
+        	    '</div>' +
+        	    '<div class="form-group">' +
+        	      '<label for="pwd">Password:</label>' +
+        	      '<input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd">' +
+        	    '</div>' +
+        	   '<button type="submit" class="btn btn-primary">Submit</button>' +
+        	  '</form>' 
+        	  
+        	   console.log($( this ).siblings("#id").text());
+        	   var1 = $( this ).siblings("#id").text();
+        	   $("#main").prepend(form1);
+        	   //$( this ).triggerHandler( "focus" );
+        	 });
+           
+     
+           $( "div.main" ).on( "submit", "#target", function(event) {
+        	   var Var2 = var1;
+        	   //var values = $( this ).serialize();
+        	   var values = $( this ).serializeArray();
+        	   console.log('i am in form function lets see var value ' + Var2);
+        	   console.log('form input ' + values);
+        	   //console.log( $( this ).serializeArray() );
+        	   event.preventDefault();
+        	 });
+           
+           
+           
+        });
+    });
+
+});
+
+</script>
+</head>
+<body>
+
+<button>Get JSON data</button>
+
+<div id = "main" class = "main">
+  
+</div> 
+
+
+
+
+</body>
+</html>

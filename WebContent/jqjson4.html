@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+<script>
+
+$(document).ready(function(){
+
+	$("button").click(function(){
+        $.getJSON("sample3.json", function(data){
+           $.each(data, function(i, user){
+   				console.log(data);
+   			
+   				
+   				if (user.parent_id == 0){
+                var comment = '<div class="row" id="media" data-id='+user.id+'>\
+                                  <div class="col-md-1" id="media-left">\
+                                     <a href="#">\
+                                       <img src="images/user.png" alt="image" width="50px" height="50px" >\
+                                     </a>\
+                                  </div>\
+                                  <div class="col-md-11" id="media-body">\
+                                     <h4 class="media-heading">'+user.title+'</h4>\
+                                     <h4><strong>'+user.name+'</strong>\
+                                   <div class="media-text">\
+                                     <p>'+user.body+'</p>\
+                                   </div>\
+                                   <div class="rep_lnk">\
+                                      <a class="reply_link"><strong>Reply</strong></a>\
+                                   </div><br/>\
+                                   <div class="row">\
+                                      <div class="col-md-1"></div>\
+                                      <div class="col-md-10">\
+                                          <div class="reply_form_wrapper"></div><br/><br/>\
+                                          <div class="reply_queue"></div>\
+                                      </div>\
+                                </div>\
+                            </div>';
+                            //console.log(comment);
+                            $("#main").append(comment);
+                            
+   				}else{
+   					
+   					var par_id = user.parent_id;
+   					
+   					console.log('in reply');
+   					//$(this).$("#reply_form_wrapper").append('TTTTTTTTTTTTTT');
+   					$("div").find("span")
+   					
+   					
+   				}
+                            
+                            
+                            
+                            
+                 });
+
+        });
+    });
+
+});
+
+</script>
+</head>
+<body>
+
+<button>Get JSON data</button>
+
+<div id="main" class="container">
+
+</div>
+
+</body>
+</html>
